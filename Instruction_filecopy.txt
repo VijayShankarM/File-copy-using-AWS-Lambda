@@ -1,0 +1,47 @@
+Step 1: Create S3 Buckets
+	Open the AWS S3 console.
+	Click "Create bucket".
+	Enter a unique bucket name (e.g., source-bucket-yourname).
+	Leave all other settings as default and click "Create".
+	Repeat the process to create another bucket (e.g., destination-bucket-yourname).
+
+Step 2: Create the Lambda Function
+	Open the AWS Lambda console.
+	Click "Create function" → Select "Author from scratch".
+	Enter a function name, e.g., S3CopyFunction.
+	Choose Python 3.x as the runtime.
+	Click "Create function".
+
+Step 3: Add an Environment Variable
+	In the Lambda function, go to "Configuration" → "Environment variables".
+	Click "Edit", then "Add environment variable".
+	Enter the following:
+	Key: DEST_BUCKET
+	Value: destination-bucket-yourname
+	Click "Save".
+
+Step 4: Update IAM Permissions
+	In the Lambda function, go to "Configuration" → "Permissions".
+	Click on the IAM role name to open it in the IAM console.
+	Click "Add permissions" → "Attach policies".
+	Choose "Create inline policy", and use the iam_policy:
+	Click "Review policy", name it (e.g., S3CopyPolicy), and click "Create policy".
+
+Step 5: Add the Lambda Code
+	Go to the "Code" tab of your Lambda function.
+	Delete any existing code and replace it with the following:
+	Click "Deploy".
+
+Step 6: Set Up an S3 Trigger
+	In the Lambda function, go to "Configuration" → "Triggers".
+	Click "Add trigger".
+	Select "S3" as the trigger source.
+	Choose source-bucket-yourname from the dropdown.
+	Set the Event type to "PUT" (to trigger on file uploads).
+	Click "Add".
+
+Step 7: Test the Setup
+	Go to the S3 console and open source-bucket-yourname.
+	Upload a test file (e.g., an image or a text file).
+	Check destination-bucket-yourname to see if the file was copied automatically.
+

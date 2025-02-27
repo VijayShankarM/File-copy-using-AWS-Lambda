@@ -1,0 +1,23 @@
+{
+  "Version": "2012-10-17",
+  "Id": "default",
+  "Statement": [
+    {
+      "Sid": "lambda-be59d955-a5fa-46bf-94c4-b8aa2b7ea736",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "s3.amazonaws.com"
+      },
+      "Action": "lambda:InvokeFunction",
+      "Resource": "arn:aws:lambda:ap-south-1:820242903687:function:prince-vegeta",
+      "Condition": {
+        "StringEquals": {
+          "AWS:SourceAccount": "820242903687"
+        },
+        "ArnLike": {
+          "AWS:SourceArn": "arn:aws:s3:::son-goku-01"
+        }
+      }
+    }
+  ]
+}
